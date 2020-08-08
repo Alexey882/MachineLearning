@@ -1,0 +1,13 @@
+import pandas as pd
+read = pd.read_csv(r'C:\Users\ab448\Downloads\bookings.csv', sep = ';')
+#print(read.tail())
+#print(read.shape)
+#print(read.dtypes)
+#print(read.describe())
+#print(read.columns)
+read = read.rename(columns = {'Is Canceled':'Is_Canceled'})
+read = read.rename(columns = {'Lead Time':'Lead_time'})
+print(read.columns)
+sum_Adult = read.groupby('Country').aggregate({'Adults' : 'sum' , 'Children' :'sum'}).sort_values('Adults',ascending = False)
+sum_Adult.to_csv('Adults.csv', index =False)
+print(sum_Adult)
